@@ -5,7 +5,6 @@ import {
 	setBrowserViewport,
 	createNewPost,
 	openDocumentSettingsSidebar,
-	openSidebarPanel,
 } from '@wordpress/e2e-test-utils';
 
 describe( 'Post visibility', () => {
@@ -20,7 +19,7 @@ describe( 'Post visibility', () => {
 
 			await openDocumentSettingsSidebar();
 
-			await openSidebarPanel( 'Visibility:' );
+			await page.click( 'Edit visibility' );
 
 			const [ privateLabel ] = await page.$x(
 				'//label[text()="Private"]'
@@ -46,7 +45,7 @@ describe( 'Post visibility', () => {
 		await openDocumentSettingsSidebar();
 
 		// Set a publish date for the next month.
-		await openSidebarPanel( 'Publish' );
+		await page.click( 'Edit publish date' );
 		await page.click(
 			'div[aria-label="Move forward to switch to the next month."]'
 		);
@@ -56,7 +55,7 @@ describe( 'Post visibility', () => {
 			)
 		 )[ 0 ].click();
 
-		await openSidebarPanel( 'Visibility:' );
+		await page.click( 'Edit visibility' );
 
 		const [ privateLabel ] = await page.$x( '//label[text()="Private"]' );
 		await privateLabel.click();
